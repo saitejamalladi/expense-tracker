@@ -1,0 +1,27 @@
+.TransactionForm {
+	padding: 40px;
+	background-color: aliceblue;
+	align-items: center;
+	justify-content: center;
+	width: 40%;
+	outline: 0;
+	border: none;
+	border-radius: 10px;
+}
+.TransactionType {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	color: grey;
+	font-weight: 400;
+}
+.TransactionType .Active {
+	font-size: 18px;
+	font-weight: 600;
+}
+.SubmitButtons {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}

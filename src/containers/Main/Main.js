@@ -1,50 +1,29 @@
 import React, {Component} from 'react';
-import configurations from '../../assets/static/configurations.json';
 import OverallSummary from "../../components/OverallSummary/OverallSummary";
 import IncomeSummary from "../../components/IncomeSummary/IncomeSummary";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
 import Transactions from "../../components/Transactions/Transactions";
-import {Button, Grid} from "@material-ui/core";
+import TransactionForm from "../../components/TransactionForm/TransactionForm";
+import {Backdrop, Button, Grid, Modal} from "@material-ui/core";
+import * as actions from "../../store/actions";
+import {connect} from "react-redux";
 import './Main.css';
 
 class Main extends Component {
 	state = {
-		transactions: configurations.transactions
+		showTransForm: false
 	}
-	addTransaction = () => {
-		let existingTransactions = this.state.transactions;
-		let id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-		if(Math.floor(Math.random()*2) === 0 ) {
-			existingTransactions.push({
-				"id": id,
-				"type": 0,
-				"title": "Jan Salary",
-				"category": "Salary",
-				"description": "@@",
-				"amount": Math.floor(Math.random()*1000),
-				"currency": "USD",
-				"date": new Date()
-			});
-		} else {
-			existingTransactions.push({
-				"id": id,
-				"type": 1,
-				"title": "Groceries",
-				"description": "Fruits, Rice, Dhall, Cookies, Floors,  Vegetables",
-				"category": "Shopping",
-				"amount": Math.floor(Math.random()*1000),
-				"currency": "USD",
-				"date": new Date()
-			});
-		}
+	toggleTransForm = (value) => {
 		this.setState({
-			transactions: existingTransactions
+			showTransForm: value
 		})
+	}
+	addTransaction = (newTransaction) => {
+		this.props.submitAddTransaction(this.props.transactions, newTransaction);
+		this.toggleTransForm(false);
 	}
 	deleteTransaction = (id) => {
-		this.setState({
-			transactions: this.state.transactions.filter(transaction => transaction.id !== id)
-		})
+		this.props.submitDeleteTransaction(this.props.transactions, id);
 	}
 	render () {
 		return (
@@ -65,14 +44,40 @@ class Main extends Component {
 					</Grid>
 					<Grid item xs={12} md={4}>
 						<div>
-							<Button variant={"contained"} color={"primary"} onClick={this.addTransaction}>Add Expense</Button>
+							<Button variant={"contained"} color={"primary"} onClick={() => this.toggleTransForm(true)}>Add Expense</Button>
 						</div>
-						<Transactions transactions={this.state.transactions} Delete={this.deleteTransaction}/>
+						<Modal
+							aria-labelledby="spring-modal-title"
+							aria-describedby="spring-modal-description"
+							open={this.state.showTransForm}
+							className={"Modal"}
+							onClose={() => this.toggleTransForm(false)}
+							closeAfterTransition
+							BackdropComponent={Backdrop}
+							BackdropProps={{
+								timeout: 500,
+							}}
+						>
+							<TransactionForm AddTransaction={this.addTransaction} close={() => this.toggleTransForm(false)}/>
+						</Modal>
+						<Transactions transactions={this.props.transactions} Delete={this.deleteTransaction}/>
 					</Grid>
 				</Grid>
 			</div>
 		);
 	}
 }
+const mapStateToProps = state => {
+	return {
+		transactions: state.root.transactions
+	}
+};
 
-export default Main;
+const mapDispatchToProps = dispatch => {
+	return {
+		submitAddTransaction: (transactions, newTransaction) => dispatch( actions.submitAddTransaction(transactions, newTransaction) ),
+		submitDeleteTransaction: (transactions, id) => dispatch( actions.submitDeleteTransaction(transactions, id) ),
+	}
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
