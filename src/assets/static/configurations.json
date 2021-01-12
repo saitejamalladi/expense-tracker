@@ -1,0 +1,26 @@
+{
+  "income_categories": ["Salary", "House Rental", "Freelance", "Ehailing"],
+  "expense_categories": ["Shopping", "Home Loan", "House Rent", "Car EMI", "Mobile Internet", "Others"],
+  "transactions": [
+    {
+      "id": "p0ref36ll78kuagrkegmt",
+      "type": 0,
+      "title": "Jan Salary",
+      "category": "Salary",
+      "description": ".",
+      "amount": "11800.00",
+      "currency": "USD",
+      "date": "2020-01-01 00:00:00"
+    },
+    {
+      "id": "3cbzh53jol21htsy647eh",
+      "type": 1,
+      "title": "Groceries",
+      "description": "Fruits, Rice, Dhall, Cookies, Floors,  Vegetables",
+      "category": "Shopping",
+      "amount": "4564.50",
+      "currency": "USD",
+      "date": "2020-01-12 00:00:00"
+    }
+  ]
+}
