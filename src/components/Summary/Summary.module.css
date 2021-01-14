@@ -1,0 +1,127 @@
+.SummaryBar {
+	margin: 10px;
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.Avatar {
+	margin-right: 20px;
+}
+.ProfileSummary {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.Avatar {
+	color: grey;
+	font-size: 14px;
+}
+.WelcomeBar {
+	color: grey;
+	font-size: 18px;
+}
+.ProfileName {
+	color: black;
+	font-size: 24px;
+	font-weight: bold;
+}
+.BalanceSummaryContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px 20px;
+	padding: 10px;
+	background-color: #47bde1;
+	border-radius: 15px;
+	text-align: center;
+}
+.TotalBalance {
+	margin-top: 10px;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	opacity: 0.8;
+}
+.Balance {
+	margin: 5px 0;
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
+}
+.Balance .Currency {
+	color: white;
+	font-size: 16px;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.Balance .Amount {
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+}
+.BalanceSplit {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	background-color: #4aa4d0;
+	padding: 10px;
+	width: 90%;
+	border-radius: 5px;
+	overflow: hidden;
+}
+.BalanceSplit .Income, .BalanceSplit .Expense {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.BalanceSplit .Income .Title, .BalanceSplit .Expense .Title {
+	color: white;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	font-size: 16px;
+}
+.Amount {
+	color: white;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.Amount .Currency {
+	font-size: 16px;
+	margin-right: 5px;
+}
+.Amount .Text {
+	font-size: 18px;
+}
+.Income {
+	padding-left: 5px;
+	padding-right: 10px;
+}
+.Expense {
+	border-left: 1px solid grey;
+	padding-left: 10px;
+}
+
+.IncomeTitle {
+	display: flex;
+	align-items: center;
+}
+
+@media only screen and (min-width: 800px) {
+	.Balance .Currency {
+		color: white;
+		font-size: 20px;
+		margin-right: 10px;
+		font-weight: bold;
+	}
+
+	.Balance .Amount {
+		color: white;
+		font-size: 24px;
+		font-weight: bold;
+	}
+
+	.BalanceSplit {
+		width: 90%;
+	}
+}

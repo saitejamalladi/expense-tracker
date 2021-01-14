@@ -1,4 +1,4 @@
 export {
 	submitAddTransaction,
 	submitDeleteTransaction
-} from './root';
+} from './transactions';

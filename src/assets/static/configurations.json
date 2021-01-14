@@ -1,4 +1,142 @@
 {
-  "income_categories": ["Salary", "House Rental", "Freelance", "Ehailing"],
-  "expense_categories": ["Shopping", "Home Loan", "House Rent", "Car EMI", "Mobile Internet", "Others"]
+  "categories": [
+    {
+      "type": 1,
+      "id": 1,
+      "label": "Housing",
+      "icon": "home_work_icon"
+    },
+    {
+      "type": 1,
+      "id": 2,
+      "label": "Transportation",
+      "icon": "commute_icon"
+    },
+    {
+      "type": 1,
+      "id": 3,
+      "label": "Food",
+      "icon": "fastfood_icon"
+    },
+    {
+      "type": 1,
+      "id": 4,
+      "label": "Utilities",
+      "icon": "ev_station_icon"
+    },
+    {
+      "type": 1,
+      "id": 5,
+      "label": "Fashion",
+      "icon": "face_icon"
+    },
+    {
+      "type": 1,
+      "id": 6,
+      "label": "Medical/Healthcare",
+      "icon": "local_hospital_icon"
+    },
+    {
+      "type": 1,
+      "id": 7,
+      "label": "Insurance",
+      "icon": "business_center_icon"
+    },
+    {
+      "type": 1,
+      "id": 8,
+      "label": "Household Items/Supplies",
+      "icon": "shopping_basket_icon"
+    },
+    {
+      "type": 1,
+      "id": 9,
+      "label": "Personal",
+      "icon": "rowing_icon"
+    },
+    {
+      "type": 1,
+      "id": 10,
+      "label": "Debt",
+      "icon": "money_off_icon"
+    },
+    {
+      "type": 1,
+      "id": 11,
+      "label": "Retirement",
+      "icon": "elderly"
+    },
+    {
+      "type": 1,
+      "id": 12,
+      "label": "Education",
+      "icon": "cast_for_education"
+    },
+    {
+      "type": 1,
+      "id": 13,
+      "label": "Savings",
+      "icon": "savings"
+    },
+    {
+      "type": 1,
+      "id": 14,
+      "label": "Gifts/Donations",
+      "icon": "card_giftcard"
+    },
+    {
+      "type": 1,
+      "id": 15,
+      "label": "Entertainment",
+      "icon": "sports_esports"
+    },
+    {
+      "type": 1,
+      "id": 16,
+      "label": "Others",
+      "icon": "add_shopping_cart_icon"
+    },
+    {
+      "type": 0,
+      "id": 17,
+      "label": "Salary",
+      "icon": "local_atm"
+    },
+    {
+      "type": 0,
+      "id": 18,
+      "label": "Interest",
+      "icon": "attach_money"
+    },
+    {
+      "type": 0,
+      "id": 19,
+      "label": "Innovation",
+      "icon": "psychology"
+    },
+    {
+      "type": 0,
+      "id": 20,
+      "label": "Investment Returns",
+      "icon": "savings"
+    },
+    {
+      "type": 0,
+      "id": 21,
+      "label": "Gifts",
+      "icon": "card_giftcard"
+    },
+    {
+      "type": 0,
+      "id": 22,
+      "label": "Allowance",
+      "icon": "payments"
+    },
+    {
+      "type": 0,
+      "id": 23,
+      "label": "Others",
+      "icon": "local_atm"
+    }
+  ]
 }

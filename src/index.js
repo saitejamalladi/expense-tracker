@@ -6,11 +6,14 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import rootReducer from "./store/reducers/root";
-const customRootReducer = combineReducers({
-  root: rootReducer,
-});
+import profileReducer from "./store/reducers/profile";
+import transactionsReducer from "./store/reducers/transactions";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const customRootReducer = combineReducers({
+  transactions: transactionsReducer,
+  profile: profileReducer
+});
 const rootStore = createStore(customRootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(

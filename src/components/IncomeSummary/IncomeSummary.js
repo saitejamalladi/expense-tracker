@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import {Bar, Doughnut} from 'react-chartjs-2';
-import { Switch } from '@material-ui/core';
+import React from 'react';
+import {Bar} from 'react-chartjs-2';
 
 const barData = {
 	labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -17,58 +16,18 @@ const barData = {
 	]
 };
 
-const doughnutData = {
-	labels: [
-		'Red',
-		'Green',
-		'Yellow'
-	],
-	datasets: [{
-		data: [300, 50, 100],
-		backgroundColor: [
-			'#FF6384',
-			'#36A2EB',
-			'#FFCE56'
-		],
-		hoverBackgroundColor: [
-			'#FF6384',
-			'#36A2EB',
-			'#FFCE56'
-		]
-	}]
-};
-
 function IncomeSummary(props) {
-	const [showBar, toggleShowBar] = useState(false);
-	let displayChart = "Loading....";
-	if(showBar) {
-		displayChart = (
+	return (
+		<div>
+			<h2>Income Summary</h2>
 			<Bar
 				data={barData}
 				width={100}
 				height={50}
 				options={{
-					maintainAspectRatio: false
+					maintainAspectRatio: true
 				}}
 			/>
-		)
-	} else {
-		displayChart = (
-			<Doughnut data={doughnutData} />
-		)
-	}
-	return (
-		<div>
-			<h2>Income Summary</h2>
-			<div className={"Switch"}>
-				<Switch
-					checked={showBar}
-					onChange={(e) => toggleShowBar(e.target.checked)}
-					name="checkedA"
-					inputProps={{ 'aria-label': 'secondary checkbox' }}
-				/>
-			</div>
-			{displayChart}
 		</div>
 	);
 }

@@ -23,10 +23,8 @@ function OverallSummary(props) {
 			<h2>Overall Summary</h2>
 			<Bar
 				data={barData}
-				width={100}
-				height={50}
 				options={{
-					maintainAspectRatio: false
+					maintainAspectRatio: true
 				}}
 			/>
 		</div>

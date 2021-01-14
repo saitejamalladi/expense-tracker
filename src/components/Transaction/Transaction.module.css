@@ -1,0 +1,82 @@
+.Transaction {
+	display: flex;
+	cursor: pointer;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 10px 0;
+}
+.Transaction:hover {
+	background-color: #c3dde5;
+}
+.Left {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.Right {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.Header {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.Description {
+	font-weight: 600;
+	font-size: 14px;
+}
+.Category {
+	color: grey;
+	font-size: 14px;
+}
+.IncomeIcon {
+	padding: 10px;
+	margin: 0 10px;
+	color: #008000;
+	background-color: #bde8bd;
+	font-size: 35px !important;
+	border-radius: 10px;
+	align-items: center;
+	text-align: center;
+}
+
+.ExpenseIcon {
+	padding: 10px;
+	margin: 0 10px;
+	color: #d66e82;
+	background-color: #ffe0e6;
+	font-size: 35px !important;
+	border-radius: 10px;
+	align-items: center;
+	text-align: center;
+}
+.Details {
+	margin: 0 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: right;
+	padding-right: 10px;
+}
+.Amount {
+	font-weight: bold;
+}
+.Action {
+	margin-right: 16px;
+}
+@media only screen and (min-width: 700px) {
+	.Description {
+		font-size: 18px;
+	}
+	.Category {
+		font-size: 18px;
+	}
+	.Action {
+		margin-right: 20px;
+	}
+}

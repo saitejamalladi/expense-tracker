@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
+import {Grid} from "@material-ui/core";
+import Carousel from "react-material-ui-carousel";
+import CustomModal from "../../components/CustomModal/CustomModal";
 import OverallSummary from "../../components/OverallSummary/OverallSummary";
 import IncomeSummary from "../../components/IncomeSummary/IncomeSummary";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
-import Transactions from "../../components/Transactions/Transactions";
+// import Transactions from "../../components/Transactions/Transactions";
+import Transactions from "../Transactions/Transactions";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
-import {Backdrop, Button, Grid, Modal} from "@material-ui/core";
 import * as actions from "../../store/actions";
 import {connect} from "react-redux";
-import './Main.css';
+import classes from './Main.module.css';
+import Summary from "../../components/Summary/Summary";
 
 class Main extends Component {
 	state = {
@@ -27,40 +31,33 @@ class Main extends Component {
 	}
 	render () {
 		return (
-			<div className={"Main"}>
+			<div className={classes.Main}>
 				<Grid container justify={"center"}>
-					<Grid item xs={12} md={5}>
-						<Grid container  justify={"center"} spacing={2}>
-							<Grid item xs={12} sm={8}>
-								<OverallSummary/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<IncomeSummary/>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<ExpenseSummary/>
+					<Grid item xs={12} lg={7}>
+						<Summary
+							name={this.props.name}
+							avatarUrl={this.props.avatarUrl}
+							currency={this.props.currency}/>
+						{/*<Button variant={"contained"} color={"primary"} onClick={() => this.toggleTransForm(true)}>Add Expense</Button>*/}
+						<CustomModal show={this.state.showTransForm} close={() => this.toggleTransForm(false)}>
+							<TransactionForm AddTransaction={this.addTransaction} close={() => this.toggleTransForm(false)}/>
+						</CustomModal>
+						<Transactions transactions={this.props.transactions} Delete={this.deleteTransaction}/>
+					</Grid>
+					<Grid item xs={12} lg={4}>
+						<Grid container justify={"center"} spacing={2}>
+							<Grid item xs={12}>
+								<Carousel
+									interval={3000}
+									animation={"slide"}
+								>
+									<IncomeSummary/>
+									<ExpenseSummary/>
+									<OverallSummary/>
+									<ExpenseSummary/>
+								</Carousel>
 							</Grid>
 						</Grid>
-					</Grid>
-					<Grid item xs={12} md={4}>
-						<div>
-							<Button variant={"contained"} color={"primary"} onClick={() => this.toggleTransForm(true)}>Add Expense</Button>
-						</div>
-						<Modal
-							aria-labelledby="spring-modal-title"
-							aria-describedby="spring-modal-description"
-							open={this.state.showTransForm}
-							className={"Modal"}
-							onClose={() => this.toggleTransForm(false)}
-							closeAfterTransition
-							BackdropComponent={Backdrop}
-							BackdropProps={{
-								timeout: 500,
-							}}
-						>
-							<TransactionForm AddTransaction={this.addTransaction} close={() => this.toggleTransForm(false)}/>
-						</Modal>
-						<Transactions transactions={this.props.transactions} Delete={this.deleteTransaction}/>
 					</Grid>
 				</Grid>
 			</div>
@@ -69,7 +66,10 @@ class Main extends Component {
 }
 const mapStateToProps = state => {
 	return {
-		transactions: state.root.transactions
+		name: state.profile.name,
+		avatarUrl: state.profile.avatarUrl,
+		currency: state.profile.currency,
+		transactions: state.transactions.transactions
 	}
 };
 
