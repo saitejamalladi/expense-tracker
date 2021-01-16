@@ -1,4 +1,7 @@
 export {
+	initTransaction,
 	submitAddTransaction,
-	submitDeleteTransaction
+	submitDeleteTransaction,
+	showForm,
+	hideForm
 } from './transactions';

@@ -7,17 +7,25 @@
 .Header h2 {
 	margin: 0;
 }
-.Header .SeeAll {
-	color: #033767;
-	font-family: inherit;
-	background-color: transparent;
+.Button {
+	background-color: #4aa4d0 !important;
+	color: #fdfdfd !important;
+	font-family: inherit !important;
 	border: none;
-	font-size: 18px;
+	border-radius: 10px;
+	font-size: 18px !important;
 	margin-right: 20px;
 	font-weight: bold;
 	outline: 0;
 	cursor: pointer;
+	text-transform: none !important;
 }
-.SeeAll:hover, .SeeAll:focus {
-	text-decoration: underline;
+.Button:hover, .Button:focus {
+	letter-spacing: 0.1em;
+	background: #fdfdfd !important;
+	color: #4aa4d0 !important;
+	border:  1px solid #4aa4d0 !important;
+}
+.Button .Icon {
+	vertical-align: bottom;
 }

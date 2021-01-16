@@ -6,7 +6,10 @@
 	padding: 10px 0;
 }
 .Transaction:hover {
-	background-color: #c3dde5;
+	background-color: #e6eced;
+	transition: 0.10s ease-in-out;
+	transform: scale(1.01);
+	box-shadow: 0 0 10px grey;
 }
 .Left {
 	display: flex;
@@ -68,6 +71,12 @@
 }
 .Action {
 	margin-right: 16px;
+}
+.DeleteIcon {
+}
+.DeleteIcon:hover {
+	color: #e72424;
+	font-weight: bold;
 }
 @media only screen and (min-width: 700px) {
 	.Description {

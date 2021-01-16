@@ -10,7 +10,7 @@ function getCategoryIcon(transType, categoryId) {
 	return transType === 1  ? "add_shopping_cart_icon" : "local_atm_icon";
 }
 
-function Transaction({transaction}) {
+function Transaction({transaction, Delete}) {
 	return (
 		<div className={classes.Transaction}>
 			<div className={classes.Left}>
@@ -29,7 +29,7 @@ function Transaction({transaction}) {
 			<div className={classes.Right}>
 				<div className={classes.Details}>
 					<div className={classes.Amount}>
-						<span>{transaction.type ? '+': '-'}</span>
+						<span>{transaction.type === 0 ? '+ ': '- '}</span>
 						<span>{transaction.amount}</span>
 					</div>
 					<div className={classes.Date}>
@@ -37,7 +37,10 @@ function Transaction({transaction}) {
 					</div>
 				</div>
 				<div className={classes.Action}>
-					<Icon className={classes.DeleteIcon}>delete</Icon>
+					<Icon
+						className={classes.DeleteIcon}
+						onClick={() => Delete(transaction.id)}
+					>delete</Icon>
 				</div>
 			</div>
 		</div>

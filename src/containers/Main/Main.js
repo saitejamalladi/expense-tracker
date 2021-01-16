@@ -1,48 +1,55 @@
 import React, {Component} from 'react';
 import {Grid} from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
-import CustomModal from "../../components/CustomModal/CustomModal";
-import OverallSummary from "../../components/OverallSummary/OverallSummary";
-import IncomeSummary from "../../components/IncomeSummary/IncomeSummary";
+// import OverallSummary from "../../components/OverallSummary/OverallSummary";
+// import IncomeSummary from "../../components/IncomeSummary/IncomeSummary";
 import ExpenseSummary from "../../components/ExpenseSummary/ExpenseSummary";
-// import Transactions from "../../components/Transactions/Transactions";
 import Transactions from "../Transactions/Transactions";
-import TransactionForm from "../../components/TransactionForm/TransactionForm";
-import * as actions from "../../store/actions";
+import TransactionForm from "../TransactionForm/TransactionForm";
 import {connect} from "react-redux";
-import classes from './Main.module.css';
 import Summary from "../../components/Summary/Summary";
+import configurations from '../../assets/static/configurations.json';
+import classes from './Main.module.css';
 
 class Main extends Component {
-	state = {
-		showTransForm: false
-	}
-	toggleTransForm = (value) => {
-		this.setState({
-			showTransForm: value
+
+	generateDoughnutData = (transactions, type) => {
+		if(transactions.length <= 0) return [];
+		let categories = configurations.categories;
+		let categoryIds =
+			transactions
+				.filter(transaction => transaction.type === type)
+				.map(transaction => transaction.category_id);
+		categoryIds = Array.from(new Set(categoryIds));
+		return categoryIds.map(categoryId => {
+			let label = categories.find(category => category.id === categoryId).label;
+			let data = transactions.reduce((total, transaction) => {
+				if(transaction.type === type && transaction.category_id === categoryId) {
+					return total + Number(transaction.amount)
+				}
+				return total;
+			}, 0)
+			return {
+				id: categoryId,
+				label: label,
+				data: data
+			}
 		})
 	}
-	addTransaction = (newTransaction) => {
-		this.props.submitAddTransaction(this.props.transactions, newTransaction);
-		this.toggleTransForm(false);
-	}
-	deleteTransaction = (id) => {
-		this.props.submitDeleteTransaction(this.props.transactions, id);
-	}
+
 	render () {
+		let incomeData = this.generateDoughnutData(this.props.transactions, 0);
+		let expenseData = this.generateDoughnutData(this.props.transactions, 1);
 		return (
 			<div className={classes.Main}>
 				<Grid container justify={"center"}>
 					<Grid item xs={12} lg={7}>
 						<Summary
-							name={this.props.name}
-							avatarUrl={this.props.avatarUrl}
-							currency={this.props.currency}/>
-						{/*<Button variant={"contained"} color={"primary"} onClick={() => this.toggleTransForm(true)}>Add Expense</Button>*/}
-						<CustomModal show={this.state.showTransForm} close={() => this.toggleTransForm(false)}>
-							<TransactionForm AddTransaction={this.addTransaction} close={() => this.toggleTransForm(false)}/>
-						</CustomModal>
-						<Transactions transactions={this.props.transactions} Delete={this.deleteTransaction}/>
+							profile={this.props.profile}
+							balance={this.props.balance}
+						/>
+						<TransactionForm/>
+						<Transactions/>
 					</Grid>
 					<Grid item xs={12} lg={4}>
 						<Grid container justify={"center"} spacing={2}>
@@ -50,11 +57,10 @@ class Main extends Component {
 								<Carousel
 									interval={3000}
 									animation={"slide"}
+									navButtonsAlwaysVisible={true}
 								>
-									<IncomeSummary/>
-									<ExpenseSummary/>
-									<OverallSummary/>
-									<ExpenseSummary/>
+									<ExpenseSummary header={"Income Summary"} expenses={incomeData} />
+									<ExpenseSummary header={"Expense Summary"} expenses={expenseData} />
 								</Carousel>
 							</Grid>
 						</Grid>
@@ -66,18 +72,14 @@ class Main extends Component {
 }
 const mapStateToProps = state => {
 	return {
-		name: state.profile.name,
-		avatarUrl: state.profile.avatarUrl,
-		currency: state.profile.currency,
+		profile: state.profile,
+		balance: {
+			total: state.transactions.totalBalance,
+			income: state.transactions.incomeBalance,
+			expense: state.transactions.expenseBalance,
+		},
 		transactions: state.transactions.transactions
 	}
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		submitAddTransaction: (transactions, newTransaction) => dispatch( actions.submitAddTransaction(transactions, newTransaction) ),
-		submitDeleteTransaction: (transactions, id) => dispatch( actions.submitDeleteTransaction(transactions, id) ),
-	}
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, null)(Main);

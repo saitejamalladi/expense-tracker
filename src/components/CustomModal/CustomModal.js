@@ -1,5 +1,6 @@
 import React from 'react';
 import {Backdrop, Modal} from "@material-ui/core";
+import classes from './CustomModal.module.css';
 
 function CustomModal({show, close, children}) {
 	return (
@@ -7,7 +8,7 @@ function CustomModal({show, close, children}) {
 			aria-labelledby="spring-modal-title"
 			aria-describedby="spring-modal-description"
 			open={show}
-			className={"Modal"}
+			className={classes.CustomModal}
 			onClose={close}
 			closeAfterTransition
 			BackdropComponent={Backdrop}

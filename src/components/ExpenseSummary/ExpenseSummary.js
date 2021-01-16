@@ -1,32 +1,27 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 
-const data = {
-	labels: [
-		'Red',
-		'Green',
-		'Yellow'
-	],
-	datasets: [{
-		data: [300, 50, 100],
-		backgroundColor: [
-			'#FF6384',
-			'#36A2EB',
-			'#FFCE56'
-		],
-		hoverBackgroundColor: [
-			'#FF6384',
-			'#36A2EB',
-			'#FFCE56'
-		]
-	}]
-};
-
-function ExpenseSummary(props) {
+function ExpenseSummary({header, expenses}) {
+	const doughnutData = {
+		labels: expenses.map(expense => expense.label),
+		datasets: [{
+			data: expenses.map(expense => expense.data),
+			backgroundColor: [
+				'#FF6384',
+				'#36A2EB',
+				'#FFCE56'
+			],
+			hoverBackgroundColor: [
+				'#FF6384',
+				'#36A2EB',
+				'#FFCE56'
+			]
+		}]
+	};
 	return (
 		<div>
-			<h2>Expense Summary</h2>
-			<Doughnut data={data} />
+			<h2>{header}</h2>
+			<Doughnut data={doughnutData} />
 		</div>
 	);
 }
